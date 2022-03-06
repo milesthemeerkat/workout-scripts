@@ -1,4 +1,4 @@
-pandas==1.4.1
+pandas
 pre-commit==2.9.2
 pylint==2.8.2
 black
