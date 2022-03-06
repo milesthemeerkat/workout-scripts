@@ -10,3 +10,8 @@
 # multiple time (only on the command line, not in the configuration file where
 # it should appear only once).
 disable=R0903,R0913
+
+# some bug fix
+[MASTER]
+init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+
