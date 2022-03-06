@@ -4,10 +4,10 @@ Utility functions
 
 # import pandas as pd
 
-# from workouts.workout import Workout
+from workouts.workout import Workout
 
 
-def create_workout() -> str:
+def create_workout() -> Workout:
     """
     Create a workout from tabular data
 
