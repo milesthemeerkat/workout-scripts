@@ -10,7 +10,11 @@ repos:
       rev: v2.0.0
       hooks:
       - id: flake8
-  - repo: https://github.com/pycqa/pylint
-    rev: v2.8.2
-    hooks:
-    -   id: pylint
+  -   repo: local
+      hooks:
+      -   id: pylint
+          name: pylint
+          entry: pylint
+          language: system
+          types: [python]
+          require_serial: true
