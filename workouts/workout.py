@@ -5,6 +5,7 @@ Our workout classes
 """
 
 
+import datetime
 from typing import List
 
 
@@ -16,9 +17,11 @@ class Workout:
     """
 
     name: str
+    date: datetime
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, date: datetime):
         self.name = name
+        self.date = date
 
 
 class Lift(Workout):
@@ -32,8 +35,10 @@ class Lift(Workout):
     reps: List[int]
     sets: List[int]
 
-    def __init__(self, name: str, weight: int, reps: List[int], sets: List[int]):
-        super().__init__(name)
+    def __init__(
+        self, name: str, date: datetime, weight: int, reps: List[int], sets: List[int]
+    ):
+        super().__init__(name, date)
         self.weight = weight
         self.reps = reps
         self.sets = sets
@@ -62,9 +67,15 @@ class Cardio(Workout):
     resistance: int
 
     def __init__(
-        self, name: str, distance: int, time: int, speed: int, resistance: int
+        self,
+        name: str,
+        date: datetime,
+        distance: int,
+        time: int,
+        speed: int,
+        resistance: int,
     ):
-        super().__init__(name)
+        super().__init__(name, date)
         self.distance = distance
         self.time = time
         self.speed = speed
