@@ -80,3 +80,21 @@ class Cardio(Workout):
         self.time = time
         self.speed = speed
         self.resistance = resistance
+
+
+class WorkoutFactory:
+    """
+    Factory for creating workouts
+    """
+
+    @staticmethod
+    def create_workout(workout_type: str, **kwargs) -> Workout:
+        """
+        Creates a workout based on the type of workout
+        """
+        if workout_type == "lift":
+            return Lift(**kwargs)
+        elif workout_type == "cardio":
+            return Cardio(**kwargs)
+        else:
+            raise ValueError("Workout type not supported")
