@@ -10,11 +10,36 @@ repos:
       rev: v2.0.0
       hooks:
       - id: flake8
+  # Bug: VSCode currently does not properly use the environment selected for git commit hooks
+  # Annoyingly, this means you can't just use this pylint hook, and need to create
+  # separate hooks by routing them through a bash script; hence, this is commented out until fixed
+  # See: https://github.com/microsoft/vscode-python/issues/10165
+  # -   repo: local
+  #     hooks:
+  #     -   id: pylint
+  #         name: pylint
+  #         entry: pylint
+  #         language: system
+  #         types: [python]
+  #         require_serial: true
+  # More annoyingly, it seems the bash scripts can only handle one pylint command
+  # If I give them multiple, the only result is the latest call.
+  # So, if command one failed, but command two passes, it detects no errors.
+  # So there you go, a pylint command for every directory! Thankfully only two.
+  # A modified solution from: https://github.com/microsoft/vscode-python/issues/10165#issuecomment-818725613
   -   repo: local
       hooks:
-      -   id: pylint
-          name: pylint
-          entry: pylint
+      -   id: pylint_workouts
+          name: pylint_workouts
+          entry: bash lint_workouts.sh
+          language: system
+          types: [python]
+          require_serial: true
+  -   repo: local
+      hooks:
+      -   id: pylint_tests
+          name: pylint_tests
+          entry: bash lint_tests.sh
           language: system
           types: [python]
           require_serial: true
