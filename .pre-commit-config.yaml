@@ -43,3 +43,21 @@ repos:
           language: system
           types: [python]
           require_serial: true
+  # same issue for pytest
+  # -   repo: local
+  #     hooks:
+  #     -   id: pytest
+  #         name: pytest
+  #         entry: pytest tests/
+  #         language: system
+  #         types: [python]
+  #         require_serial: true
+  # bash version for the fix in VSCode
+  -   repo: local
+      hooks:
+      -   id: pytest
+          name: pytest
+          entry: bash run_tests.sh
+          language: system
+          types: [python]
+          require_serial: true
