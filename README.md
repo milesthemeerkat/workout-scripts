@@ -33,3 +33,6 @@ Finally, you can launch the main script:
 
 ### Running unit tests
 `python -m unittest discover -s tests` in the main directory. You can also use pytest: `pytest tests/`. They'll be run automatically with commit hooks if you have them installed.
+
+### Input Data
+The scripts will expect input data in a directory called `data/`. Drop any CSV files to read data from in this directory.
