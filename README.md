@@ -22,12 +22,14 @@ This will run each added or changed file with every commit through linters. If a
 ```
 black....................................................................Passed
 Flake8...................................................................Passed
-pylint...................................................................Passed
+pylint_workouts..........................................................Passed
+pylint_tests.............................................................Passed
+pytest...................................................................Passed
 ```
-If `black` detects necessary changes, it will update the file automatically!
+If `black` detects necessary changes, it will update the file automatically! You'll have to restage and recommit the changes, though.
 
 Finally, you can launch the main script:
 `python main.py`
 
 ### Running unit tests
-`python -m unittest discover -s tests` in the main directory.
+`python -m unittest discover -s tests` in the main directory. You can also use pytest: `pytest tests/`. They'll be run automatically with commit hooks if you have them installed.
