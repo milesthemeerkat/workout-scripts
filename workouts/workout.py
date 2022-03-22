@@ -49,7 +49,7 @@ class Lift(Workout):
         Returns the total number of reps for this lift
         """
         total_reps = 0
-        for rep, idx in enumerate(self.reps):
+        for idx, rep in enumerate(self.reps):
             total_reps += self.sets[idx] * rep
         return total_reps
 
