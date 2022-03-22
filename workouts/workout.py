@@ -61,7 +61,7 @@ class Cardio(Workout):
     A cardio type of workout
     """
 
-    distance: int
+    # TODO: time and speed need to account for units
     time: int
     speed: int
     resistance: int
@@ -70,16 +70,21 @@ class Cardio(Workout):
         self,
         name: str,
         date: datetime,
-        distance: int,
         time: int,
         speed: int,
         resistance: int,
     ):
         super().__init__(name, date)
-        self.distance = distance
         self.time = time
         self.speed = speed
         self.resistance = resistance
+
+    @property
+    def distance(self) -> int:
+        """
+        Returns the distance of this cardio workout
+        """
+        return self.time * self.speed
 
 
 class WorkoutFactory:
