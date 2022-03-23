@@ -57,6 +57,19 @@ class TestLift(TestCase):
         workout = Lift(name=name, date=date, weights=weights, reps=reps, sets=sets)
         self.assertEqual(workout.total_reps, 40)
 
+    def test_total_weight_returns_weight_for_all_sets_and_resp(self):
+        """
+        Test the total_weight property returns the total weight lifted, accounting for sets and reps
+        """
+        name = "Test"
+        date = datetime.datetime.now()
+        reps = [20, 10]
+        sets = [1, 2]
+        weights = [20, 10]
+        workout = Lift(name=name, date=date, weights=weights, reps=reps, sets=sets)
+        # total weight = (20 * 1 * 20) + (10 * 2 * 10) = 600
+        self.assertEqual(workout.total_weight, 600)
+
 
 class TestCardio(TestCase):
     """

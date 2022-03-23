@@ -58,6 +58,16 @@ class Lift(Workout):
             total_reps += self.sets[idx] * rep
         return total_reps
 
+    @property
+    def total_weight(self) -> int:
+        """
+        Returns the total weight lifted for this lift
+        """
+        total_weight = 0
+        for idx, weight in enumerate(self.weights):
+            total_weight += self.sets[idx] * self.reps[idx] * weight
+        return total_weight
+
 
 class Cardio(Workout):
     """
