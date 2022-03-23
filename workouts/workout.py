@@ -31,15 +31,20 @@ class Lift(Workout):
     A lifting type of workout
     """
 
-    weight: int
+    weights: List[int]
     reps: List[int]
     sets: List[int]
 
     def __init__(
-        self, name: str, date: datetime, weight: int, reps: List[int], sets: List[int]
+        self,
+        name: str,
+        date: datetime,
+        weights: List[int],
+        reps: List[int],
+        sets: List[int],
     ):
         super().__init__(name, date)
-        self.weight = weight
+        self.weights = weights
         self.reps = reps
         self.sets = sets
 

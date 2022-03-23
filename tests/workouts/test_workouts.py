@@ -37,11 +37,11 @@ class TestLift(TestCase):
         date = datetime.datetime.now()
         reps = [20, 10]
         sets = [1, 2]
-        weight = 20
-        workout = Lift(name=name, date=date, weight=weight, reps=reps, sets=sets)
+        weights = [20, 10]
+        workout = Lift(name=name, date=date, weights=weights, reps=reps, sets=sets)
         self.assertEqual(workout.name, name)
         self.assertEqual(workout.date, date)
-        self.assertEqual(workout.weight, weight)
+        self.assertEqual(workout.weights, weights)
         self.assertEqual(workout.reps, reps)
         self.assertEqual(workout.sets, sets)
 
@@ -53,8 +53,8 @@ class TestLift(TestCase):
         date = datetime.datetime.now()
         reps = [20, 10]
         sets = [1, 2]
-        weight = 20
-        workout = Lift(name=name, date=date, weight=weight, reps=reps, sets=sets)
+        weights = [20, 10]
+        workout = Lift(name=name, date=date, weights=weights, reps=reps, sets=sets)
         self.assertEqual(workout.total_reps, 40)
 
 
