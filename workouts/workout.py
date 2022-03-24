@@ -8,6 +8,8 @@ Our workout classes
 import datetime
 from typing import List
 
+from workouts.conversions import convert_time
+
 
 class Workout:
     """
@@ -76,30 +78,78 @@ class Cardio(Workout):
     A cardio type of workout
     """
 
-    # TODO: time and speed need to account for units
-    time: int
-    speed: int
-    resistance: int
+    times: List[int]
+    time_units: List[str]
+    speeds: List[int]
+    speed_units: List[str]
+    resistances: List[int]
+    distances: List[int]
+    distance_units: List[str]
 
     def __init__(
         self,
         name: str,
         date: datetime,
-        time: int,
-        speed: int,
-        resistance: int,
+        times: List[int],
+        time_units: List[str],
+        speeds: List[int],
+        speed_units: List[str],
+        resistances: List[int],
+        distances: List[int] = None,
+        distance_units: List[str] = None,
     ):
         super().__init__(name, date)
-        self.time = time
-        self.speed = speed
-        self.resistance = resistance
+        self.times = times
+        self.time_units = time_units
+        self.speeds = speeds
+        self.speed_units = speed_units
+        self.resistances = resistances
 
-    @property
-    def distance(self) -> int:
+        if distance_units:
+            self.distance_units = distance_units
+        else:
+            self.distance_units = self._get_distance_units_from_speed_units()
+
+        if distances:
+            self.distances = distances
+        else:
+            self.distances = self._get_distances_from_speed_and_time()
+
+    def _get_distance_units_from_speed_units(self) -> List[str]:
         """
-        Returns the distance of this cardio workout
+        Returns the distance units from the speed units
         """
-        return self.time * self.speed
+        distance_units = []
+        for speed_unit in self.speed_units:
+            distance_unit = speed_unit.split("/")[0]
+            distance_units.append(distance_unit)
+        return distance_units
+
+    def _get_distances_from_speed_and_time(self) -> List[int]:
+        """
+        Returns the distance from the speed and time
+        """
+        distances = []
+
+        for idx, speed_unit in enumerate(self.speed_units):
+            time_unit = speed_unit.split("/")[1]
+
+            if time_unit != self.time_units[idx]:
+                # TODO: Set up logging in the future
+                print(
+                    f"Units for time ({self.time_units[idx]}) did not match \
+                        units from speed ({time_unit})!"
+                )
+                print(f"Converting time accorrding to speed units ({time_unit})")
+                # Convert times and time units to match speed's time units
+                self.times[idx] = convert_time(
+                    self.times[idx], self.time_units[idx], time_unit
+                )
+                self.time_units[idx] = time_unit
+
+            distances.append(self.speeds[idx] * self.times[idx])
+
+        return distances
 
 
 class WorkoutFactory:
